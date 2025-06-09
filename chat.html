@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h3>Likhai Assistant</h3>
+    <textarea id="query" rows="4" cols="50" placeholder="Ask something..."></textarea><br/>
+    <button onclick="sendQuery()">Ask</button>
+    <div id="response" style="margin-top: 12px; white-space: pre-wrap; font-family: monospace;"></div>
+
+
+    <script>
+      function sendQuery() {
+        const query = document.getElementById("query").value;
+        google.script.run.withSuccessHandler(function(response) {
+          document.getElementById("response").innerText = response;
+        }).processLikhaiQuery(query);
+      }
+    </script>
+  </body>
+</html>
