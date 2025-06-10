@@ -1,31 +1,52 @@
 # 🧠 Likhai Assistant – GPT-Powered AI for Google Sheets
 
-Likhai Assistant is a smart, GPT-powered AI companion for Google Sheets built by **Akash Rathi**. It brings conversational intelligence and spreadsheet automation together — letting users summarize, generate tables, and auto-suggest dashboards with simple natural language prompts.
+**Likhai Assistant** is an intelligent, GPT-powered chatbot for Google Sheets built by **Akash Rathi**. It brings seamless natural language processing to spreadsheets — allowing users to summarize data, ask questions, generate tables, and auto-create dashboards right from a sidebar.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- 🔍 **Custom Formula**: Use `=LIKHAI("summarize revenue trend", A1:D10)` directly in cells to get insights.
-- 💬 **Chat Sidebar**: An interactive HTML sidebar lets users chat with GPT-3.5 right inside the spreadsheet.
-- 📋 **Prompt-Based Table Generation**: Enter a prompt like "Make a 7-day study plan" and generate a markdown table into a new sheet.
-- 📊 **Dashboard Helper**: Select data, then ask Likhai to suggest and auto-create charts like bar or line graphs.
-- 🔐 **Works with OpenAI API Key**: Securely stored via script properties (not in source code).
+- 🔍 **Custom Formula**  
+  Use `=LIKHAI("summarize revenue trend", A1:D10)` to get insights on spreadsheet data directly in cells.
+
+- 💬 **Interactive Chat Sidebar**  
+  A sleek, WhatsApp-style chat UI inside Google Sheets. Supports multi-turn dialogue, shows loading spinners, and retains message history.
+
+- 🧠 **Context-Aware Chat**  
+  Auto-includes selected table data in your prompt so GPT can answer contextually.
+
+- 📋 **Prompt-Based Table Generator**  
+  Describe any structure in plain English — e.g. “Make a 6-week physics study plan” — and Likhai generates a usable markdown table inserted into a new sheet.
+
+- 📊 **Dashboard Generator**  
+  Select any data, ask "suggest charts," and it creates labeled column/bar charts with headings and axis labels.
+
+- 📈 **Persistent Conversation History**  
+  Keeps the last 10 turns stored for continued conversations.
+
+- ⏳ **Smart Loading State**  
+  Prevents multiple submissions, shows spinner while LLM responds.
+
+- 🛠 **Logging for Interactions**  
+  Every query + response is logged in a `Likhai Logs` sheet for easy review.
+
+- 🔐 **Secure Key Management**  
+  Uses a script property to store the API key securely. Now integrated with **LiteLLM (GPT-4o-mini)**.
 
 ---
 
 ## 🔧 Built With
 
-- 🧠 OpenAI GPT-3.5 API (can switch to GPT-4 if available)
-- 📄 Google Apps Script for backend logic
-- 🧩 HTML + Sidebar UI for chat
-- 🚀 CLASP (`clasp`) for local GitHub integration
+- 🧠 [LiteLLM](https://dev-litellm.leadschool.in/) GPT-4o-mini model (secure, internal endpoint)
+- 📄 Google Apps Script (backend + formula handler)
+- 💬 HTML + CSS (for styled sidebar UI with chat bubbles)
+- 🚀 [CLASP](https://github.com/google/clasp) (command-line Apps Script deploy tool)
 
 ---
 
 ## 🛠 Deployment Guide
 
-> This setup assumes you already have a Google Apps Script project created or use the provided script ID.
+> This setup assumes you have Apps Script linked via `clasp` or want to clone and push changes.
 
 ```bash
 # 1. Clone this repo
@@ -35,32 +56,23 @@ cd Likhai-UI-Final
 # 2. Install clasp (if not already installed)
 npm install -g @google/clasp
 
-# 3. Log in to clasp with your Google account
+# 3. Authenticate with Google
 clasp login
 
 # 4. Link to your Apps Script project
-# If new, update `.clasp.json` with your new scriptId or use:
-"scriptId": "1XVMSvdFSd5RZItUqSECZuv6k3Ub1Ky-N-c0sQD9OHJsGMckGXRV5Sq90"
+# OR replace .clasp.json with your script ID:
+"scriptId": "YOUR_SCRIPT_ID_HERE"
 
-# 5. Push code to Apps Script
+# 5. Push to Apps Script project
 clasp push
 
-# 6. Open Google Sheets > Extensions > Apps Script > Deploy as add-on
-## 📁 Folder Structure
-
+# 6. Open Google Sheet > Extensions > Apps Script > Run `onOpen`
+#    Then access the sidebar from "🧠 Likhai Assistant" menu
 Likhai-UI-Final/
-├── .clasp.json # Links project to Google Apps Script
-├── appsscript.json # Apps Script project manifest (triggers, timeZone, etc.)
-├── code.js # Main backend logic: formula, table/chart handlers
-├── chat.html # HTML sidebar UI for GPT chat
-├── README.md # Project documentation
-## ✍️ Author
-
-Built with ❤️ by **Akash Rathi**  
-- 🧠 Full-stack Google Apps Script + OpenAI developer  
-- 🛠️ Passionate about smart tooling & internal AI assistants  
-- 🌐 GitHub: [@clammyface](https://github.com/clammyface)  
-- 📩 Connect via organization domain or raise an issue on GitHub
-
----
-
+├── .clasp.json          # Links local project to Google Apps Script
+├── appsscript.json      # Manifest with timeZone, oauthScopes, etc.
+├── Code.js              # Backend logic (formula, chat, charts, logging)
+├── chat.html            # Chat UI with rounded messages & spinner
+├── README.md            # You’re reading it
+✍️ Author
+Built with ❤️ by Akash Rathi
